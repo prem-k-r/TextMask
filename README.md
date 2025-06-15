@@ -21,6 +21,12 @@ A Chromium-based browser extension that lets you temporarily randomize or blur t
 
 ---
 
+### Screenshots
+
+<img src="https://github.com/user-attachments/assets/e859a312-5c72-4906-96c3-7dba33547016" height="400px" />
+
+---
+
 ## How to Install
 
 1. Navigate to `chrome://extensions` in your Chrome browser.
