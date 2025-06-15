@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextMask</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 16px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .toggle-group:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .toggle-label {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .toggle-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .toggle-subtitle {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        .modern-switch {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            margin-left: 12px;
+        }
+
+        .modern-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input:checked+.switch-slider {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        input:checked+.switch-slider:before {
+            transform: translateX(24px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .instructions {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .instructions-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .instructions-title::before {
+            content: "⌨️";
+            font-size: 16px;
+        }
+
+        .shortcut-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .shortcut-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .shortcut-item:last-child {
+            border-bottom: none;
+        }
+
+        .shortcut-keys {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 80px;
+            text-align: center;
+            margin-right: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .shortcut-description {
+            font-size: 12px;
+            opacity: 0.9;
+            flex: 1;
+        }
+
+        .footer {
+            padding: 12px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            font-size: 10px;
+            opacity: 0.75;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .toggle-group {
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        .toggle-group:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .instructions {
+            animation: slideIn 0.3s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        /* Disabled state */
+        .toggle-group.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>TextMask</h1>
+        <p>Randomize or blur any webpage text</p>
+    </div>
+
+    <div class="main-content">
+        <div class="toggle-group">
+            <div class="toggle-label">
+                <span class="toggle-title">Enable Randomizer</span>
+                <span class="toggle-subtitle">Activate text transformation</span>
+            </div>
+            <label class="modern-switch">
+                <input type="checkbox" id="toggleSwitch">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="toggle-group">
+            <div class="toggle-label">
+                <span class="toggle-title">Auto Blur</span>
+                <span class="toggle-subtitle">Blur text after randomizing</span>
+            </div>
+            <label class="modern-switch">
+                <input type="checkbox" id="blurToggle">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="instructions">
+            <div class="instructions-title">Keyboard Shortcuts</div>
+            <ul class="shortcut-list">
+                <li class="shortcut-item">
+                    <div class="shortcut-keys">Alt + Click</div>
+                    <div class="shortcut-description">Randomize text</div>
+                </li>
+                <li class="shortcut-item">
+                    <div class="shortcut-keys">Ctrl + Click</div>
+                    <div class="shortcut-description">Increase blur</div>
+                </li>
+                <li class="shortcut-item">
+                    <div class="shortcut-keys">Ctrl + Alt + Click</div>
+                    <div class="shortcut-description">Clear text</div>
+                </li>
+                <li class="shortcut-item">
+                    <div class="shortcut-keys">Ctrl + Z</div>
+                    <div class="shortcut-description">Undo last change</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Thank you! ❤️ </p>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+{
+	"manifest_version": 3,
+	"name": "TextMask",
+	"version": "0.9",
+	"description": "Randomize or blur text on any webpage for capturing screenshot",
+	"permissions": ["storage", "scripting"],
+	"host_permissions": ["<all_urls>"],
+	"action": {
+		"default_popup": "popup.html",
+		"default_title": "Toggle Text Randomizer",
+		"default_icon": "icon.png"
+	},
+	"icons": {
+		"128": "icon.png"
+	},
+	"background": {
+		"service_worker": "background.js"
+	}
+}
