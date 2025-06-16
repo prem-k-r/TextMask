@@ -34,4 +34,4 @@ A Chromium-based browser extension that lets you temporarily randomize or blur t
 3. Click the **Load unpacked** button.
 4. Select the extension's folder.
 
-Initial version is based on [this](https://github.com/ThioJoe/Simple-Chrome-Extension-Utilities)
+Initial version is based on [this](https://github.com/ThioJoe/Simple-Chrome-Extension-Utilities/tree/8e2821e24f0d366fc0511bbe63b3c3ea864f4ea3/Click%20To%20Randomize%20Text/Extension)
