@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "TextMask",
-	"version": "0.9",
+	"version": "1.0",
 	"description": "Randomize or blur text on any webpage for capturing screenshot",
 	"permissions": ["storage", "scripting"],
 	"host_permissions": ["<all_urls>"],
