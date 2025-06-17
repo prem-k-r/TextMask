@@ -26,9 +26,9 @@ A Chromium-based browser extension that lets you temporarily randomize or blur t
  - **Clone the Repository**:
       Use the following command to clone the repository:
 
-       ```bash
-       https://github.com/prem-k-r/TextMask.git
-       ```
+      ```
+      https://github.com/prem-k-r/TextMask.git
+      ```
 
     - Alternatively, download the latest version as a ZIP file by clicking below:
 
